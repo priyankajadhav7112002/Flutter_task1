@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-// import 'package:task1/screens/addmissionListPage.dart';
-import 'package:task1/screens/homePage.dart';
+import 'package:task1/addmissionListPage.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -104,8 +103,8 @@ class _LoginPageState extends State<LoginPage> {
     return ElevatedButton(
       onPressed: () {
         if (widget._formKey.currentState!.validate()) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AdmissionListPage()));
         }
       },
       child: const SizedBox(

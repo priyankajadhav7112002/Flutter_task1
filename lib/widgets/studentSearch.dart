@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:task1/models/student.dart';
-import 'package:task1/widgets/student_item.dart';
 
 class StudentSearch extends SearchDelegate<Student> {
   final List<dynamic> students;
@@ -60,17 +59,6 @@ class StudentSearch extends SearchDelegate<Student> {
           title: Text(student.firstName),
           onTap: () {
             close(context, student);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Scaffold(
-                  appBar: AppBar(
-                    title: Text('Student Details'),
-                  ),
-                  body: StudentItem(student),
-                ),
-              ),
-            );
           },
         );
       },
@@ -94,17 +82,6 @@ class StudentSearch extends SearchDelegate<Student> {
           title: Text(student.firstName),
           onTap: () {
             close(context, student);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Scaffold(
-                  appBar: AppBar(
-                    title: Text('Student Details'),
-                  ),
-                  body: StudentItem(student),
-                ),
-              ),
-            );
           },
         );
       },
