@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:task1/addmissionListPage.dart';
+// import 'package:task1/screens/addmissionListPage.dart';
+import 'package:flutter_offline/flutter_offline.dart';
+
+import 'package:task1/screens/homePage.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -100,25 +103,72 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _registerBtn() {
-    return ElevatedButton(
-      onPressed: () {
-        if (widget._formKey.currentState!.validate()) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AdmissionListPage()));
+    return OfflineBuilder(
+      connectivityBuilder: (
+        BuildContext context,
+        ConnectivityResult connectivity,
+        Widget child,
+      ) {
+        if (connectivity == ConnectivityResult.none) {
+          return ElevatedButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('No Internet Connection'),
+                    content: Text('Please check your internet connection.'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: const SizedBox(
+              width: double.infinity,
+              child: Text(
+                'Sign Up',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              shape: const StadiumBorder(),
+              padding: const EdgeInsets.symmetric(vertical: 16),
+            ),
+          );
+        } else {
+          return ElevatedButton(
+            onPressed: () {
+              if (widget._formKey.currentState!.validate()) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              }
+            },
+            child: const SizedBox(
+              width: double.infinity,
+              child: Text(
+                'Sign Up',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              shape: const StadiumBorder(),
+              padding: const EdgeInsets.symmetric(vertical: 16),
+            ),
+          );
         }
       },
-      child: const SizedBox(
-        width: double.infinity,
-        child: Text(
-          'Sign Up',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
-      style: ElevatedButton.styleFrom(
-        shape: const StadiumBorder(),
-        padding: const EdgeInsets.symmetric(vertical: 16),
-      ),
+      child: const SizedBox(),
     );
   }
 }

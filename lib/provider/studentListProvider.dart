@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task1/models/student.dart';
-import 'package:task1/studentApiService.dart';
+import 'package:task1/api/studentApiService.dart';
 
 class StudentListProvider with ChangeNotifier {
   List<dynamic>? _students;
