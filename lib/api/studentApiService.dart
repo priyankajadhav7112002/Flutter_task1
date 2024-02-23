@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:task1/models/student.dart';
 
@@ -17,7 +16,7 @@ class StudentApiService {
         // If filters are provided, filter the list of students
         if (selectedFilters != null && selectedFilters.isNotEmpty) {
           data = data
-              .where((student) => selectedFilters.contains(student['userCode']))
+              .where((student) => selectedFilters.contains(student.userCode))
               .toList();
         }
 

@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:task1/provider/photoListProvider.dart';
+import 'package:task1/provider/postListProvider.dart';
 
-import 'package:task1/loginPage.dart';
+import 'package:task1/screens/loginPage.dart';
 
 import 'package:task1/provider/studentListProvider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => StudentListProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => StudentListProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PhotoListProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PostListProvider(),
+        ),
+      ],
       child: const MyApp(),
     ),
   );

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:task1/models/student.dart';
-import 'package:task1/studentApiService.dart';
+import 'package:task1/api/studentApiService.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class StudentListProvider with ChangeNotifier {
   List<dynamic>? _students;
+  bool _isLoading = false;
 
   List<dynamic> get students {
     return _students ?? [];
   }
+
+  bool get isLoading => _isLoading;
 
   Future<void> fetchStudents({List<String> selectedFilters = const []}) async {
     try {
@@ -19,8 +23,10 @@ class StudentListProvider with ChangeNotifier {
       }
     } catch (error) {
       print(error);
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
-    notifyListeners();
   }
 
   Future<void> updateStudent(Student updatedStudent) async {
